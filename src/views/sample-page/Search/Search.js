@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useGlobalContext } from '../../../context/index';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
@@ -27,8 +28,9 @@ const PopperStyle = styled(Popper, { shouldForwardProp })(({ theme }) => ({
 }));
 
 const OutlineInputStyle = styled(OutlinedInput, { shouldForwardProp })(({ theme }) => ({
-    width: 434,
+    width: '100%',
     marginLeft: 16,
+    marginRight: 16,
     paddingLeft: 16,
     paddingRight: 16,
     '& input': {
@@ -58,15 +60,14 @@ const HeaderAvatarStyle = styled(Avatar, { shouldForwardProp })(({ theme }) => (
 
 // ==============================|| SEARCH INPUT - MOBILE||============================== //
 
-const MobileSearch = ({ value, setValue, popupState }) => {
+const MobileSearch = ({ handleSubmit, popupState }) => {
     const theme = useTheme();
 
     return (
         <OutlineInputStyle
             id="input-search-header"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            placeholder="Search"
+            onSubmit={handleSubmit}
+            placeholder="The Lost World"
             startAdornment={
                 <InputAdornment position="start">
                     <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
@@ -107,17 +108,23 @@ const MobileSearch = ({ value, setValue, popupState }) => {
     );
 };
 
-MobileSearch.propTypes = {
-    value: PropTypes.string,
-    setValue: PropTypes.func,
-    popupState: PopupState
-};
-
 // ==============================|| SEARCH INPUT ||============================== //
 
-const SearchSection = () => {
+const Search = () => {
     const theme = useTheme();
-    const [value, setValue] = useState('');
+    const { setSearchTerm, setResultTitle } = useGlobalContext();
+    const handleSubmit = (e) => {
+        if (e.key == 'Enter') {
+            e.preventDefault();
+            let tempSearchTerm = e.target.value;
+            if (tempSearchTerm.replace(/[^\w\s]/gi, '').length === 0) {
+                setSearchTerm('the lost world');
+                setResultTitle('Please Enter Something ...');
+            } else {
+                setSearchTerm(e.target.value);
+            }
+        }
+    };
 
     return (
         <>
@@ -148,7 +155,7 @@ const SearchSection = () => {
                                                 <Box sx={{ p: 2 }}>
                                                     <Grid container alignItems="center" justifyContent="space-between">
                                                         <Grid item xs>
-                                                            <MobileSearch value={value} setValue={setValue} popupState={popupState} />
+                                                            <MobileSearch handleSubmit={handleSubmit} popupState={popupState} />
                                                         </Grid>
                                                     </Grid>
                                                 </Box>
@@ -164,9 +171,8 @@ const SearchSection = () => {
             <Box sx={{ display: { xs: 'none', md: 'block' } }}>
                 <OutlineInputStyle
                     id="input-search-header"
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)}
-                    placeholder="Search"
+                    onKeyDown={handleSubmit}
+                    placeholder="The Lost World"
                     startAdornment={
                         <InputAdornment position="start">
                             <IconSearch stroke={1.5} size="1rem" color={theme.palette.grey[500]} />
@@ -189,4 +195,4 @@ const SearchSection = () => {
     );
 };
 
-export default SearchSection;
+export default Search;

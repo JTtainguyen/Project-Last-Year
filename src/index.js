@@ -8,21 +8,28 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from 'serviceWorker';
 import App from 'App';
 import { store } from 'store';
+import { AppProvider } from './context/index';
 
 // style + assets
 import 'assets/scss/style.scss';
 import config from './config';
+
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 // ==============================|| REACT DOM RENDER  ||============================== //
 
 const container = document.getElementById('root');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(
-    <Provider store={store}>
-        <BrowserRouter basename={config.basename}>
-            <App />
-        </BrowserRouter>
-    </Provider>
+    <AppProvider>
+        <GoogleOAuthProvider clientId="180294533690-6hlc05v7km15enlbj86m8ul6tnb4c7pf.apps.googleusercontent.com">
+            <Provider store={store}>
+                <BrowserRouter basename={config.basename}>
+                    <App />
+                </BrowserRouter>
+            </Provider>
+        </GoogleOAuthProvider>
+    </AppProvider>
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -7,15 +7,19 @@ import Loadable from 'ui-component/Loadable';
 // dashboard routing
 const DashboardDefault = Loadable(lazy(() => import('views/dashboard/Default')));
 
+const BookDetails = Loadable(lazy(() => import('views/BookDetails/index')));
+
 // utilities routing
-const UtilsTypography = Loadable(lazy(() => import('views/utilities/Typography')));
-const UtilsColor = Loadable(lazy(() => import('views/utilities/Color')));
-const UtilsShadow = Loadable(lazy(() => import('views/utilities/Shadow')));
-const UtilsMaterialIcons = Loadable(lazy(() => import('views/utilities/MaterialIcons')));
-const UtilsTablerIcons = Loadable(lazy(() => import('views/utilities/TablerIcons')));
+const Romance = Loadable(lazy(() => import('views/BookType/Romance')));
+const Kid = Loadable(lazy(() => import('views/BookType/Kids')));
+const Thrillers = Loadable(lazy(() => import('views/BookType/Thrillers')));
+const Textbooks = Loadable(lazy(() => import('views/BookType/Textbooks')));
 
 // sample page routing
-const SamplePage = Loadable(lazy(() => import('views/sample-page')));
+const AboutUs = Loadable(lazy(() => import('views/sample-page/AboutUs')));
+const SearchSection = Loadable(lazy(() => import('views/sample-page/Search/index')));
+
+const Profile = Loadable(lazy(() => import('views/Profile/index')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
@@ -37,53 +41,56 @@ const MainRoutes = {
             ]
         },
         {
-            path: 'utils',
+            path: 'bookType',
             children: [
                 {
-                    path: 'util-typography',
-                    element: <UtilsTypography />
+                    path: 'type-romance',
+                    element: <Romance />
                 }
             ]
         },
         {
-            path: 'utils',
+            path: 'bookType',
             children: [
                 {
-                    path: 'util-color',
-                    element: <UtilsColor />
+                    path: 'type-kids',
+                    element: <Kid />
                 }
             ]
         },
         {
-            path: 'utils',
+            path: 'bookType',
             children: [
                 {
-                    path: 'util-shadow',
-                    element: <UtilsShadow />
+                    path: 'type-thrillers',
+                    element: <Thrillers />
                 }
             ]
         },
         {
-            path: 'icons',
+            path: 'bookType',
             children: [
                 {
-                    path: 'tabler-icons',
-                    element: <UtilsTablerIcons />
+                    path: 'type-textbooks',
+                    element: <Textbooks />
                 }
             ]
         },
         {
-            path: 'icons',
-            children: [
-                {
-                    path: 'material-icons',
-                    element: <UtilsMaterialIcons />
-                }
-            ]
+            path: 'other/about-us',
+            element: <AboutUs />
         },
         {
-            path: 'sample-page',
-            element: <SamplePage />
+            path: 'other/search',
+            element: <SearchSection />
+        },
+        {
+            path: 'book/:id',
+            element: <BookDetails />
+        },
+        {
+            path: 'user/social-profile/posts',
+            element: <Profile />
         }
     ]
 };

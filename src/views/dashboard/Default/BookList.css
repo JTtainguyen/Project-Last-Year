@@ -1,0 +1,122 @@
+.booklist {
+  display: grid;
+  grid-template-rows: 1 1 1;
+}
+
+.booklist, .book-details{
+  padding: 3rem 0;
+  background-color: #f8f9fa;
+}
+.booklist-content{
+  gap: 3rem;
+  display: grid;
+}
+.book-item{
+  padding: 3rem 2rem;
+  border-radius: 4px;
+  background-color: var(--white-color);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.book-item:hover{
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 5px 15px 0px;
+}
+
+.book-item-img {
+  margin: 0 auto;
+  min-height: 201.34px;
+}
+
+.book-item-img img{
+  max-width: 180px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.book-item-info{
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.book-item-info-item {
+  font-size: 18px;
+}
+
+.book-item-info-item.title{
+  line-height: 1.4;
+  margin-bottom: 0.8rem;
+  display: block;
+  text-decoration: none;
+  font-weight: 700;
+  color: black;
+}
+
+.book-item-info-item.title:hover {
+  opacity: 0.6;
+}
+
+.book-item-info-item.author{
+  line-height: 1.4;
+  margin-bottom: 4px;
+  font-size: 15px;
+}
+
+.text-capitalize {
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.book-item-info-item.edition-count,
+.book-item-info-item.publish-year {
+  font-size: 15px;
+}
+
+.book-item-info-item:not(.book-item-info-item.title) span:last-child{
+  opacity: 0.8;
+}
+.book-item-info-item.publish-year{
+  opacity: 0.6;
+  font-style: italic;
+  font-size: 14px;
+  margin-top: 3px;
+}
+
+.rate {
+  position: absolute;
+  bottom: 20px;
+  left: 100px;
+}
+
+.rate span {
+  margin-left: 3px;
+}
+
+.checked {
+  color: orange;
+}
+
+@media screen and (min-width: 600px){
+  .booklist-content{
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 992px){
+  .booklist-content{
+      grid-template-columns: repeat(3, 1fr);
+  }
+  .book-item-img img{
+      max-width: 150px;
+  }
+}
+
+@media screen and (min-width: 992px){
+  .booklist-content{
+      grid-template-columns: repeat(4, 1fr);
+  }
+  .book-item-img img{
+      max-width: 120px;
+  }
+}

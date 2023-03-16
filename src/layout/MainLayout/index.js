@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { Outlet } from 'react-router-dom';
+import axios from 'axios';
 
 // material-ui
 import { styled, useTheme } from '@mui/material/styles';

@@ -73,7 +73,8 @@ const FirebaseLogin = ({ ...others }) => {
                 const activeUser = {
                     firstName: user.first_name,
                     lastName: user.last_name,
-                    email: user.email
+                    email: user.email,
+                    rate: user.rate
                 };
                 localStorage.setItem('activeUser', JSON.stringify(activeUser));
                 navigate('/dashboard/default');
@@ -93,7 +94,8 @@ const FirebaseLogin = ({ ...others }) => {
                                     const activeUser = {
                                         firstName: given_name,
                                         lastName: family_name,
-                                        email: email
+                                        email: email,
+                                        rate: 0
                                     };
                                     localStorage.setItem('activeUser', JSON.stringify(activeUser));
                                     navigate('/dashboard/default');

@@ -93,7 +93,7 @@ const FirebaseRegister = ({ ...others }) => {
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email, password: password })
+                body: JSON.stringify({ first_name: firstName, last_name: lastName, email: email, password: password, rate: '0' })
             })
                 .then((response) => response.json())
                 .then((response) => console.log(JSON.stringify(response)));

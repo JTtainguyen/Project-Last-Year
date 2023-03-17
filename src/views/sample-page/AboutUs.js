@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 // project imports
 import MainCard from 'ui-component/cards/MainCard';
 import './rate.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 // ==============================|| SAMPLE PAGE ||============================== //
 const CustomButton = styled(Button)({
@@ -47,8 +47,22 @@ const CustomButton = styled(Button)({
 });
 
 const AboutUs = () => {
-    const [rating, setRating] = useState(0);
+    const [rating, setRating] = useState(+JSON.parse(localStorage.getItem('activeUser')).rate);
     const [hover, setHover] = useState(0);
+    const [users, setUsers] = useState([]);
+
+    const fetchUsers = async () => {
+        await fetch('https://6413494bc469cff60d5ef0c5.mockapi.io/users')
+            .then((response) => response.json())
+            .then((data) => setUsers(data))
+            .catch(function (err) {
+                console.log('Fetch Error :-S', err);
+            });
+    };
+    useEffect(() => {
+        fetchUsers();
+    }, []);
+
     return (
         <>
             <MainCard title="About Us">
@@ -77,6 +91,33 @@ const AboutUs = () => {
                                 className={index <= (hover || rating) ? 'on' : 'off'}
                                 onClick={() => {
                                     setRating(index);
+                                    const activeUser = JSON.parse(localStorage.getItem('activeUser'));
+                                    const newUser = {
+                                        ...activeUser,
+                                        rate: index.toString()
+                                    };
+                                    localStorage.setItem('activeUser', JSON.stringify(newUser));
+                                    users?.map((user) => {
+                                        if (user.email == activeUser.email) {
+                                            fetch(`https://6413494bc469cff60d5ef0c5.mockapi.io/users/${user.id}`, {
+                                                method: 'PUT',
+                                                headers: {
+                                                    Accept: 'application/json',
+                                                    'Content-type': 'application/json; charset=UTF-8'
+                                                },
+                                                body: JSON.stringify({
+                                                    ...user,
+                                                    rate: newUser.rate,
+                                                    first_name: activeUser.firstName,
+                                                    last_name: activeUser.lastName
+                                                })
+                                            })
+                                                .then((response) => response.json())
+                                                .then((response) => console.log(JSON.stringify(response)));
+                                            localStorage.setItem('activeUser', JSON.stringify(newUser));
+                                        }
+                                        return user;
+                                    });
                                 }}
                                 onMouseEnter={() => setHover(index)}
                                 onMouseLeave={() => setHover(rating)}

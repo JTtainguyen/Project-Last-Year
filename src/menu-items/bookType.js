@@ -1,14 +1,3 @@
-// assets
-import { IconTypography, IconPalette, IconShadow, IconWindmill } from '@tabler/icons';
-
-// constant
-const icons = {
-    IconTypography,
-    IconPalette,
-    IconShadow,
-    IconWindmill
-};
-
 // ==============================|| UTILITIES MENU ITEMS ||============================== //
 
 const bookType = {
@@ -21,7 +10,6 @@ const bookType = {
             title: 'Romance',
             type: 'item',
             url: '/bookType/type-romance',
-            icon: icons.IconTypography,
             breadcrumbs: false
         },
         {
@@ -29,7 +17,6 @@ const bookType = {
             title: 'Kids',
             type: 'item',
             url: '/bookType/type-kids',
-            icon: icons.IconPalette,
             breadcrumbs: false
         },
         {
@@ -37,14 +24,12 @@ const bookType = {
             title: 'Thrillers',
             type: 'item',
             url: '/bookType/type-thrillers',
-            icon: icons.IconShadow,
             breadcrumbs: false
         },
         {
             id: 'type-textbooks',
             title: 'Textbooks',
             type: 'item',
-            icon: icons.IconWindmill,
             url: 'bookType/type-textbooks',
             breadcrumbs: false
         }

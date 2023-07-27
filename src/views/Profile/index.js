@@ -9,7 +9,6 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project imports
-import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
 
@@ -19,7 +18,6 @@ import { strengthColor, strengthIndicator } from 'utils/password-strength';
 
 const Profile = ({ ...others }) => {
     const theme = useTheme();
-    const scriptedRef = useScriptRef();
     const matchDownSM = useMediaQuery(theme.breakpoints.down('md'));
     const [, setStrength] = useState(0);
     const [, setLevel] = useState();

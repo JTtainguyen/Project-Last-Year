@@ -46,7 +46,7 @@ const ProfileSection = () => {
      * */
     const anchorRef = useRef(null);
     const handleLogout = async () => {
-        navigate('/');
+        navigate('/free');
     };
 
     const handleClose = (event) => {
@@ -56,8 +56,8 @@ const ProfileSection = () => {
         setOpen(false);
     };
 
+    //get information of the active user from localStorage
     const user = JSON.parse(localStorage.getItem('activeUser'));
-    console.log(user);
 
     const handleListItemClick = (event, index, route = '') => {
         setSelectedIndex(index);

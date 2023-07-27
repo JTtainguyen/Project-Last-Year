@@ -28,18 +28,14 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project imports
-import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 
 // assets
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 
-// ============================|| FIREBASE - LOGIN ||============================ //
-
 const FirebaseLogin = ({ ...others }) => {
     const theme = useTheme();
-    const scriptedRef = useScriptRef();
     const customization = useSelector((state) => state.customization);
     const [checked, setChecked] = useState(true);
     const navigate = useNavigate();
@@ -49,6 +45,7 @@ const FirebaseLogin = ({ ...others }) => {
     const [users, setUsers] = useState([]);
 
     const fetchUsers = async () => {
+        //fetch user information
         await fetch('https://6413494bc469cff60d5ef0c5.mockapi.io/users')
             .then((response) => response.json())
             .then((data) => setUsers(data))
@@ -68,6 +65,7 @@ const FirebaseLogin = ({ ...others }) => {
     const handleLogin = (e) => {
         fetchUsers();
         e.preventDefault();
+        //map to check the entered information is correct
         users.map((user) => {
             if (user.email == email && user.password == password) {
                 const activeUser = {
@@ -76,6 +74,7 @@ const FirebaseLogin = ({ ...others }) => {
                     email: user.email,
                     rate: user.rate
                 };
+                //post to localStorage
                 localStorage.setItem('activeUser', JSON.stringify(activeUser));
                 navigate('/dashboard/default');
             }
@@ -88,8 +87,10 @@ const FirebaseLogin = ({ ...others }) => {
                 <Grid item xs={12}>
                     <AnimateButton>
                         <Grid item xs={12} container alignItems="center" justifyContent="center">
+                            {/* Login by google acount */}
                             <GoogleLogin
                                 onSuccess={(credentialResponse) => {
+                                    //decode user information by token
                                     const { email, family_name, given_name } = jwt_decode(credentialResponse.credential);
                                     const activeUser = {
                                         firstName: given_name,

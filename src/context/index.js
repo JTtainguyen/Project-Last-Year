@@ -14,6 +14,7 @@ const AppProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [resultTitle, setResultTitle] = useState('');
 
+    //Fetch 20 books that contain the key word
     const fetchBooks = useCallback(async () => {
         setLoading(true);
         try {
@@ -37,6 +38,7 @@ const AppProvider = ({ children }) => {
 
                 setBooks(newBooks);
 
+                //check if there is a book contaisn that keyword
                 if (newBooks.length > 1) {
                     setResultTitle('Your Search Result');
                 } else {
@@ -53,6 +55,7 @@ const AppProvider = ({ children }) => {
         }
     }, [searchTerm]);
 
+    //fetch 20 books to display on the dashboard screen
     const fetchDashboard = useCallback(async () => {
         setLoading(true);
         try {
@@ -92,6 +95,7 @@ const AppProvider = ({ children }) => {
         }
     }, []);
 
+    //fetch the books type romance (because this api does not support search by type so just search by keyword love)
     const fetchRomance = useCallback(async () => {
         setLoading(true);
         try {
@@ -132,6 +136,7 @@ const AppProvider = ({ children }) => {
         }
     }, []);
 
+    //fetch the books type kids (because this api does not support search by type so just search by keyword kid)
     const fetchKid = useCallback(async () => {
         setLoading(true);
         try {
@@ -172,6 +177,7 @@ const AppProvider = ({ children }) => {
         }
     }, []);
 
+    //fetch the books type thriller (because this api does not support search by type so just search by keyword thriller)
     const fetchThrillers = useCallback(async () => {
         setLoading(true);
         try {
@@ -251,6 +257,7 @@ const AppProvider = ({ children }) => {
         }
     }, []);
 
+    // fetch data again if there is a chnage with data
     useEffect(() => {
         fetchBooks();
         fetchDashboard();
@@ -260,6 +267,7 @@ const AppProvider = ({ children }) => {
         fetchTextbooks();
     }, [searchTerm, fetchDashboard, fetchBooks, fetchRomance, fetchKid, fetchThrillers, fetchTextbooks]);
 
+    // use context that will not consume much time when navigate (load 1 time at the beginning and then does not need to load again when navigate)
     return (
         <AppContext.Provider
             value={{

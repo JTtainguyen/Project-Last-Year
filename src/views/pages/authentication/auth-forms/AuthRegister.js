@@ -25,7 +25,6 @@ import * as Yup from 'yup';
 import { Formik } from 'formik';
 
 // project imports
-import useScriptRef from 'hooks/useScriptRef';
 import AnimateButton from 'ui-component/extended/AnimateButton';
 import { strengthColor, strengthIndicator } from 'utils/password-strength';
 
@@ -70,6 +69,7 @@ const FirebaseRegister = ({ ...others }) => {
     }, [email]);
 
     const fetchUsers = async () => {
+        //fetch data of user from mock api (maybe it outdates for this api)
         await fetch('https://6413494bc469cff60d5ef0c5.mockapi.io/users')
             .then((response) => response.json())
             .then((data) => setUsers(data))
@@ -87,6 +87,7 @@ const FirebaseRegister = ({ ...others }) => {
             }
         });
         if (firstName && lastName && email && password) {
+            //post new user to the mock api
             fetch('https://6413494bc469cff60d5ef0c5.mockapi.io/users', {
                 method: 'POST',
                 headers: {
@@ -104,6 +105,7 @@ const FirebaseRegister = ({ ...others }) => {
 
     return (
         <>
+            {/* check the field by formik */}
             <Formik
                 initialValues={{
                     email: '',

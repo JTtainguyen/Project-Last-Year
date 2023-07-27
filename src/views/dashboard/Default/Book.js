@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import './BookList.css';
 
+//Each book in the main screen
 const Book = (book) => {
     return (
         <div className="book-item">

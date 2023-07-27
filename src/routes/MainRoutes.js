@@ -23,6 +23,7 @@ const Profile = Loadable(lazy(() => import('views/Profile/index')));
 
 // ==============================|| MAIN ROUTING ||============================== //
 
+//render the element when route
 const MainRoutes = {
     path: '/',
     element: <MainLayout />,

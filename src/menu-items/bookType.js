@@ -1,5 +1,6 @@
 // ==============================|| UTILITIES MENU ITEMS ||============================== //
 
+//declare the url to navigate
 const bookType = {
     id: 'utilities',
     title: 'Book Type',

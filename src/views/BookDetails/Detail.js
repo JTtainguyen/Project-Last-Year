@@ -6,6 +6,7 @@ import { FaArrowLeft } from 'react-icons/fa';
 const Details = ({ details, download }) => {
     const [, setLoading] = useState(false);
     const [book, setBook] = useState(null);
+    //get the detail information of the specific book
     useEffect(() => {
         setLoading(true);
         async function getBookDetails(details) {
